@@ -273,6 +273,11 @@ def create_particles():
     st.markdown(particles_html, unsafe_allow_html=True)
 
 # Dados das IAs (mantidos como original)
+# main.py
+
+# ... (outras partes do código como imports, CSS, etc.)
+
+# Dados das IAs disponíveis no ecossistema (ATUALIZADO)
 AI_TOOLS = {
     "text_generator": {
         "icon": "✍️",
@@ -334,12 +339,68 @@ AI_TOOLS = {
         "icon": "🎬",
         "title": "Editor de Vídeo IA",
         "description": "Edição automática de vídeos com cortes inteligentes, legendas e efeitos visuais.",
-        "status": "Beta",
+        "status": "Online",
+        "category": "Visual"
+    },
+    # --- NOVAS FERRAMENTAS ADICIONADAS AQUI ---
+    "omnihuman_1": {
+        "icon": "👤",
+        "title": "OMNIHUMAN-1",
+        "description": "Criação de avatares e humanos digitais hiper-realistas para diversas aplicações.",
+        "status": "Online",
+        "category": "Visual"
+    },
+    "manus_ai": {
+        "icon": "✍️",
+        "title": "MANUS AI",
+        "description": "Modelo de linguagem avançado para geração de texto complexo e criativo.",
+        "status": "Online",
+        "category": "Criação"
+    },
+    "qwen_3": {
+        "icon": "🧠",
+        "title": "QWEN 3",
+        "description": "IA de conversação poderosa para responder perguntas, criar conteúdo e mais.",
+        "status": "Online",
+        "category": "Criação"
+    },
+    "kling_ai": {
+        "icon": "🎥",
+        "title": "KLING AI 2.1",
+        "description": "Geração de vídeo de alta fidelidade a partir de prompts de texto.",
+        "status": "Online",
+        "category": "Visual"
+    },
+    "baidu_ernie": {
+        "icon": "📖",
+        "title": "BAIDU ERNIE 4.5",
+        "description": "Modelo de fundação da Baidu para compreensão e geração de linguagem natural.",
+        "status": "Online",
+        "category": "Criação"
+    },
+    "zai_glm": {
+        "icon": "💡",
+        "title": "Z.AI GLM-4.5",
+        "description": "Modelo de linguagem geral para tarefas de raciocínio e criação de conteúdo.",
+        "status": "Online",
+        "category": "Criação"
+    },
+    "deepseek_v3": {
+        "icon": "🚀",
+        "title": "DEEPSEEK V3.1",
+        "description": "IA especializada em geração de código e conversação técnica com alta performance.",
+        "status": "Online",
+        "category": "Desenvolvimento"
+    },
+    "seedream_4": {
+        "icon": "🏞️",
+        "title": "SEEDREAM 4.0",
+        "description": "Geração de imagens de alta qualidade com grande realismo e detalhe a partir de texto.",
+        "status": "Online",
         "category": "Visual"
     }
 }
 
-# --- NOVAS FUNÇÕES DE RENDERIZAÇÃO DE PÁGINA ---
 
 def render_ai_link_page(ai_key):
     """
