@@ -2,10 +2,11 @@ import streamlit as st
 import time
 from datetime import datetime
 import base64
-from components.ai_interfaces import AI_INTERFACES
+# A importação de AI_INTERFACES não é mais necessária aqui, mas mantemos caso queira usar no futuro
+from components.ai_interfaces import AI_INTERFACES 
 from config import AI_LINKS
 
-# Configuração da página
+# Configuração da página (mantida como original)
 st.set_page_config(
     page_title="Nexus - Ecossistema de IAs",
     page_icon="🌐",
@@ -13,7 +14,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# CSS customizado para criar o visual futurista do ecossistema
+# CSS customizado (mantido como original)
 def load_css():
     st.markdown("""
     <style>
@@ -64,28 +65,7 @@ def load_css():
         position: relative;
         overflow: hidden;
         transition: all 0.3s ease;
-        cursor: pointer;
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    }
-    
-    .ai-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(45deg, #00d4ff, #00ff88, #ff6b6b, #ffd93d);
-        border-radius: 20px;
-        padding: 2px;
-        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        mask-composite: exclude;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-    
-    .ai-card:hover::before {
-        opacity: 1;
     }
     
     .ai-card:hover {
@@ -278,7 +258,7 @@ def load_css():
     """, unsafe_allow_html=True)
 
 
-# Função para criar partículas flutuantes
+# Função para criar partículas flutuantes (mantida como original)
 def create_particles():
     particles_html = """
     <div class="floating-particles">
@@ -292,7 +272,7 @@ def create_particles():
     particles_html += "</div>"
     st.markdown(particles_html, unsafe_allow_html=True)
 
-# Dados das IAs disponíveis no ecossistema
+# Dados das IAs (mantidos como original)
 AI_TOOLS = {
     "text_generator": {
         "icon": "✍️",
@@ -359,97 +339,13 @@ AI_TOOLS = {
     }
 }
 
-def main():
-    load_css()
-    create_particles()
-    
-    # Header principal
-    st.markdown('<h1 class="main-header">NEXUS</h1>', unsafe_allow_html=True)
-    st.markdown('<p class="subtitle">Ecossistema Inteligente de IAs para Produtividade</p>', unsafe_allow_html=True)
-    
-    # Estatísticas do ecossistema
-    col1, col2, col3, col4 = st.columns(4)
-    
-    with col1:
-        st.markdown("""
-        <div class="stat-item">
-            <div class="stat-number">9</div>
-            <div class="stat-label">IAs Ativas</div>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown("""
-        <div class="stat-item">
-            <div class="stat-number">24/7</div>
-            <div class="stat-label">Disponibilidade</div>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col3:
-        st.markdown("""
-        <div class="stat-item">
-            <div class="stat-number">∞</div>
-            <div class="stat-label">Possibilidades</div>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col4:
-        st.markdown("""
-        <div class="stat-item">
-            <div class="stat-number">100%</div>
-            <div class="stat-label">Segurança</div>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    st.markdown("<br>", unsafe_allow_html=True)
-    
-    # Container do ecossistema
-    st.markdown('<div class="ecosystem-container">', unsafe_allow_html=True)
-    
-    # Criar cards das IAs em grid
-    cols = st.columns(3)
-    
-    for idx, (key, ai_tool) in enumerate(AI_TOOLS.items()):
-        col_idx = idx % 3
-        
-        with cols[col_idx]:
-            # Card da IA
-            card_html = f"""
-            <div class="ai-card" onclick="selectAI('{key}')">
-                <div class="ai-icon">{ai_tool['icon']}</div>
-                <div class="ai-title">{ai_tool['title']}</div>
-                <div class="ai-description">{ai_tool['description']}</div>
-                <div class="ai-status">
-                    <div class="status-dot"></div>
-                    {ai_tool['status']}
-                </div>
-            </div>
-            """
-            st.markdown(card_html, unsafe_allow_html=True)
-            
-            # Botão para acessar a IA
-            if st.button(f"Acessar {ai_tool['title']}", key=f"btn_{key}"):
-                st.session_state.selected_ai = key
-                st.rerun()
-    
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    # JavaScript para interatividade
-    st.markdown("""
-    <script>
-    function selectAI(aiKey) {
-        console.log('IA selecionada:', aiKey);
-    }
-    </script>
-    """, unsafe_allow_html=True)
-    
-    # Verificar se uma IA foi selecionada
-    if 'selected_ai' in st.session_state:
-        show_ai_interface(st.session_state.selected_ai)
+# --- NOVAS FUNÇÕES DE RENDERIZAÇÃO DE PÁGINA ---
 
-def show_ai_interface(ai_key):
-    """Mostra a interface específica da IA selecionada"""
+def render_ai_link_page(ai_key):
+    """
+    Renderiza a "página" que contém apenas as informações e os links 
+    da IA selecionada.
+    """
     ai_tool = AI_TOOLS[ai_key]
     
     # Header da IA selecionada
@@ -463,34 +359,15 @@ def show_ai_interface(ai_key):
             <p style="color: #a0a0a0; text-align: center; font-family: 'Rajdhani', sans-serif;">
                 {ai_tool['description']}
             </p>
-            <div style="text-align: center;">
-                <span style="color: #00ff88;">● {ai_tool['status']}</span>
-                <span style="color: #a0a0a0; margin-left: 2rem;">Categoria: {ai_tool['category']}</span>
-            </div>
         </div>
     </div>
     """, unsafe_allow_html=True)
     
-    # Usar interface específica se disponível
-    if ai_key in AI_INTERFACES:
-        AI_INTERFACES[ai_key]()
-    else:
-        # Interface genérica para IAs não implementadas ainda
-        st.markdown("### 🚧 Interface em Desenvolvimento")
-        st.info(f"A interface completa para {ai_tool['title']} está sendo desenvolvida. Em breve estará disponível!")
-        
-        # Simulação básica
-        if st.button("🧪 Testar Funcionalidade Básica"):
-            with st.spinner("Processando..."):
-                time.sleep(2)
-                st.success("✅ Teste concluído com sucesso!")
-                st.write("Esta é uma demonstração básica da funcionalidade.")
-    
-    # Exibir links relacionados, se houver
+    # Exibe os links relacionados, que é o foco desta página
     if ai_key in AI_LINKS and AI_LINKS[ai_key]:
         st.markdown("""
         <div class="links-container">
-            <h4>Ferramentas Relacionadas</h4>
+            <h4>Ferramentas e Links de Acesso</h4>
         """, unsafe_allow_html=True)
         for link_item in AI_LINKS[ai_key]:
             st.markdown(f"""
@@ -500,16 +377,90 @@ def show_ai_interface(ai_key):
             </div>
             """, unsafe_allow_html=True)
         st.markdown("</div>", unsafe_allow_html=True)
+    else:
+        st.warning(f"Nenhuma ferramenta ou link relacionado foi encontrado para {ai_tool['title']}.")
 
     # Botão para voltar ao ecossistema
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    if st.button("🔙 Voltar ao Ecossistema"):
+        # Limpa o estado para causar a navegação de volta para a página principal
+        del st.session_state.selected_ai
+        st.rerun()
+
+def render_main_page():
+    """
+    Renderiza a página principal do ecossistema com a grade de IAs.
+    """
+    # Header principal
+    st.markdown('<h1 class="main-header">NEXUS</h1>', unsafe_allow_html=True)
+    st.markdown('<p class="subtitle">Ecossistema Inteligente de IAs para Produtividade</p>', unsafe_allow_html=True)
+    
+    # Estatísticas do ecossistema
+    st.markdown('<div class="stats-container">', unsafe_allow_html=True)
+    cols = st.columns(4)
+    stats = [("9", "IAs Ativas"), ("24/7", "Disponibilidade"), ("∞", "Possibilidades"), ("100%", "Segurança")]
+    for i, (number, label) in enumerate(stats):
+        with cols[i]:
+            st.markdown(f"""
+            <div class="stat-item">
+                <div class="stat-number">{number}</div>
+                <div class="stat-label">{label}</div>
+            </div>
+            """, unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
+    
     st.markdown("<br>", unsafe_allow_html=True)
-    col1, col2, col3 = st.columns([1, 1, 1])
-    with col2:
-        if st.button("🔙 Voltar ao Ecossistema", type="secondary"):
-            if 'selected_ai' in st.session_state:
-                del st.session_state.selected_ai
-            st.rerun()
+    
+    # Função de callback para ser usada pelos botões
+    def select_ai(ai_key):
+        st.session_state.selected_ai = ai_key
+
+    # Container e grade de IAs
+    st.markdown('<div class="ecosystem-container">', unsafe_allow_html=True)
+    cols = st.columns(3)
+    for idx, (key, ai_tool) in enumerate(AI_TOOLS.items()):
+        with cols[idx % 3]:
+            # O card HTML é agora apenas visual. A ação é feita pelo botão do Streamlit.
+            st.markdown(f"""
+            <div class="ai-card">
+                <div class="ai-icon">{ai_tool['icon']}</div>
+                <div class="ai-title">{ai_tool['title']}</div>
+                <div class="ai-description">{ai_tool['description']}</div>
+                <div class="ai-status">
+                    <div class="status-dot"></div>
+                    {ai_tool['status']}
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            # Botão para acessar a "página" da IA
+            st.button(
+                f"Acessar Ferramentas de {ai_tool['title']}", 
+                key=f"btn_{key}",
+                on_click=select_ai,
+                args=(key,)
+            )
+            st.markdown("<br>", unsafe_allow_html=True)
+    
+    st.markdown('</div>', unsafe_allow_html=True)
+
+
+# --- FUNÇÃO PRINCIPAL QUE ATUA COMO ROTEADOR ---
+
+def main():
+    """
+    Função principal que controla qual página é exibida com base no estado da sessão.
+    """
+    load_css()
+    create_particles()
+    
+    # Roteador: Verifica se uma IA foi selecionada no estado da sessão
+    if 'selected_ai' in st.session_state:
+        # Se sim, renderiza a página de links da IA
+        render_ai_link_page(st.session_state.selected_ai)
+    else:
+        # Se não, renderiza a página principal do ecossistema
+        render_main_page()
 
 if __name__ == "__main__":
     main()
-
