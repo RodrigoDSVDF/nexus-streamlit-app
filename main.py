@@ -397,8 +397,8 @@ def render_main_page():
     
     # Estatísticas do ecossistema
     st.markdown('<div class="stats-container">', unsafe_allow_html=True)
-    cols = st.columns(4)
-    stats = [("9", "IAs Ativas"), ("24/7", "Disponibilidade"), ("∞", "Possibilidades"), ("100%", "Segurança")]
+    cols = st.columns(4)stats = [("18", "IAs Ativas"), ("24/7", "Disponibilidade"), ("∞", "Possibilidades"), ("100%", "Segurança")]
+    stats = [("18", "IAs Ativas"), ("24/7", "Disponibilidade"), ("∞", "Possibilidades"), ("100%", "Segurança")]
     for i, (number, label) in enumerate(stats):
         with cols[i]:
             st.markdown(f"""
