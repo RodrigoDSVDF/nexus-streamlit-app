@@ -7,5 +7,5 @@ click==8.1.7
 markdown-it-py==4.0.0
 mdurl==0.1.2
 pygments==2.19.2
-rich==14.1.0
+rich==13.7.1
 streamlit==1.38.0
