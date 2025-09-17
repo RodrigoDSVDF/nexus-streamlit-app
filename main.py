@@ -272,12 +272,7 @@ def create_particles():
     particles_html += "</div>"
     st.markdown(particles_html, unsafe_allow_html=True)
 
-# Dados das IAs (mantidos como original)
-# main.py
-
-# ... (outras partes do código como imports, CSS, etc.)
-
-# Dados das IAs disponíveis no ecossistema (ATUALIZADO)
+# ===== ALTERAÇÃO 2: DADOS DAS IAS ATUALIZADOS COM AS 9 NOVAS FERRAMENTAS =====
 AI_TOOLS = {
     "text_generator": {
         "icon": "✍️",
@@ -401,6 +396,7 @@ AI_TOOLS = {
     }
 }
 
+# ===== ALTERAÇÃO 1: NOVA ESTRUTURA DE PÁGINAS =====
 
 def render_ai_link_page(ai_key):
     """
@@ -458,8 +454,11 @@ def render_main_page():
     
     # Estatísticas do ecossistema
     st.markdown('<div class="stats-container">', unsafe_allow_html=True)
-    cols = st.columns(4)stats = [("18", "IAs Ativas"), ("24/7", "Disponibilidade"), ("∞", "Possibilidades"), ("100%", "Segurança")]
+    cols = st.columns(4)
+    
+    # ===== ALTERAÇÃO 3: CONTADOR DE IAS ATUALIZADO PARA 18 =====
     stats = [("18", "IAs Ativas"), ("24/7", "Disponibilidade"), ("∞", "Possibilidades"), ("100%", "Segurança")]
+    
     for i, (number, label) in enumerate(stats):
         with cols[i]:
             st.markdown(f"""
@@ -478,8 +477,15 @@ def render_main_page():
 
     # Container e grade de IAs
     st.markdown('<div class="ecosystem-container">', unsafe_allow_html=True)
+    # Garante que haja colunas suficientes para todos os cards
+    num_items = len(AI_TOOLS)
     cols = st.columns(3)
-    for idx, (key, ai_tool) in enumerate(AI_TOOLS.items()):
+    
+    # Itera sobre a lista de chaves para garantir a ordem
+    ai_keys = list(AI_TOOLS.keys())
+
+    for idx, key in enumerate(ai_keys):
+        ai_tool = AI_TOOLS[key]
         with cols[idx % 3]:
             # O card HTML é agora apenas visual. A ação é feita pelo botão do Streamlit.
             st.markdown(f"""
